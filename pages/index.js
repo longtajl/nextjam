@@ -17,14 +17,24 @@ export default function Home({ notices }) {
   )
 }
 
-export const getStaticProps = async () => {
+Home.getInitialProps = async (ctx) => {
     const key = { headers: { 'X-API-KEY': process.env.API_KEY } }
     const data = await fetch('https://ngoo.microcms.io/api/v1/notices', key)
         .then(res => res.json())
         .catch(() => null);
     return {
-        props: {
-            notices: data.contents
-        }
+        notices: data.contents
     }
 };
+
+// export const getStaticProps = async () => {
+//     const key = { headers: { 'X-API-KEY': process.env.API_KEY } }
+//     const data = await fetch('https://ngoo.microcms.io/api/v1/notices', key)
+//         .then(res => res.json())
+//         .catch(() => null);
+//     return {
+//         props: {
+//             notices: data.contents
+//         }
+//     }
+// };
